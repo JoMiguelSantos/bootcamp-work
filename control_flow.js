@@ -1,22 +1,26 @@
 function logType(arg) {
-	if (typeof arg === "symbol") return console.log("I have no idea!")
-	if (typeof arg === "bigint") return console.log("bigint!")
-	if (Array.isArray(arg)) return console.log("array!")
-	if (isNaN(arg) && typeof arg === "number") return console.log("not a number!")
-	if (arg === null) return console.log("null!")
-	switch (typeof arg) {
-		case "undefined":
-			return console.log("undefined!")
-		case "number":
-			return console.log("number!")
-		case "string":
-			return console.log("string!")
-		case "function":
-			return console.log("function!")
-		case "object":
-			return console.log("object!")
-		case "boolean":
-			return console.log("boolean!")
+	if (typeof arg === "symbol") {
+		return console.log("I have no idea!")
+	} else if (typeof arg === "bigint") {
+		return console.log("bigint!")
+	} else if (Array.isArray(arg)) {
+		return console.log("array!")
+	} else if (isNaN(arg) && typeof arg === "number") {
+		return console.log("not a number!")
+	} else if (arg === null) {
+		return console.log("null!")
+	} else if (typeof arg === "undefined") {
+		return console.log("undefined!")
+	} else if (typeof arg === "number") {
+		return console.log("number!")
+	} else if (typeof arg === "string") {
+		return console.log("string!")
+	} else if (typeof arg === "function") {
+		return console.log("function!")
+	} else if (typeof arg === "object") {
+		return console.log("object!")
+	} else if (typeof arg === "boolean") {
+		return console.log("boolean!")
 	}
 }
 
