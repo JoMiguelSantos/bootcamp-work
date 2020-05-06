@@ -1,6 +1,6 @@
 function logType(arg) {
 	if (typeof arg === "symbol") {
-		return console.log("I have no idea!")
+		return console.log("symbol!")
 	} else if (typeof arg === "bigint") {
 		return console.log("bigint!")
 	} else if (Array.isArray(arg)) {
@@ -21,6 +21,8 @@ function logType(arg) {
 		return console.log("object!")
 	} else if (typeof arg === "boolean") {
 		return console.log("boolean!")
+	} else {
+		return console.log("I have no idea!")
 	}
 }
 
