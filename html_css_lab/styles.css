@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    padding: 10px 20px;
+}
+
+.logo {
+    width: 100px;
+    height: 20px;
+    float: left;
+}
+
+.hamburger {
+    width: 20px;
+    height: 20px;
+    float: right;
+}
+
+.banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url(./assets/spices.jpg) no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner > * {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.banner h3 {
+    transform: translate(-50%, -100%);
+    color: whitesmoke;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    width: fit-content;
+}
+@media only screen and (max-width: 300px) {
+    .banner h3 {
+        font-size: smaller;
+    }
+}
+
+.banner button {
+    transform: translate(-50%, 50%);
+    border-radius: 50px;
+    padding: 2px 30px;
+    background-color: gold;
+    border-color: orange;
+    color: rgb(202, 131, 0);
+    font-weight: 600;
+    font-size: 14px;
+}
+@media only screen and (max-width: 600px) {
+    .banner button {
+        font-size: 12px;
+    }
+}
+
+.features {
+    padding: 20px;
+    background-color: lightgray;
+    background-size: cover;
+    height: fit-content;
+}
+
+.feature-img {
+    width: 20%;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.feature-content {
+    display: inline-block;
+    width: 75%;
+    vertical-align: middle;
+}
+
+.feature-content > * {
+    font-size: 9px;
+}
+@media only screen and (max-width: 200px) {
+    .feature-content > * {
+        font-size: 7px;
+    }
+}
+
+.feature-content p {
+    margin-bottom: 5px;
+    width: 130%;
+}
+
+.first-col,
+.second-col {
+    display: inline-block;
+    width: 45%;
+    padding: 0 5%;
+}
+
+ul {
+    list-style: none;
+}
+
+ul div {
+    display: inline-block;
+}
+
+footer {
+    font-size: 7px;
+    color: whitesmoke;
+    background-color: rgb(65, 65, 65);
+    padding: 5px;
+}
