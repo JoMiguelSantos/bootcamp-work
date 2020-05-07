@@ -45,7 +45,12 @@ each(["a", "b"], function (val, idx) {
 // original array unchanged.
 
 function reverseArr(arr) {
-    return arr.slice().reverse();
+    var newArray = [];
+    for (var i = arr.length - 1; i >= 0; i--) {
+        newArray.push(arr[i]);
+    }
+    return newArray;
+    // return arr.slice().reverse(); Easy way
 }
 const testArr = [1, 2, 3, 4, 5, 6];
 const resultArr = reverseArr(testArr);
