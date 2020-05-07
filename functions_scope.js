@@ -7,9 +7,9 @@
 // sum(5, 10, 15, 100, 200); //330
 
 function sumAll() {
-    let sum = 0;
-    for (let num of arguments) {
-        sum += num;
+    var sum = 0;
+    for (var i = 0; i < arguments.length; i++) {
+        sum += arguments[i];
     }
     console.log(sum);
     return sum;
@@ -43,7 +43,7 @@ runLater(waitThenRun);
 // a number that is greater than or equal to 1000000 and return that.
 
 function multiplyTill1M(arg) {
-    if (typeof arg !== "number" || arg <= 0) {
+    if (typeof arg !== "number" || isNaN(arg) || arg <= 0) {
         console.log("ERROR");
         return "ERROR";
     }
@@ -65,7 +65,7 @@ multiplyTill1M("string");
 // That is, it should return the sum of all the numbers that were ever passed to it.
 
 function getTotaler() {
-    let num = 0;
+    var num = 0;
     return function (addThis) {
         num += addThis;
         console.log(num);
