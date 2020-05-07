@@ -14,7 +14,7 @@
 
 function each(arrOrObj, cb) {
     if (typeof arrOrObj === "object") {
-        for (let key in arrOrObj) {
+        for (var key in arrOrObj) {
             cb(arrOrObj[key], key);
         }
     } else if (Array.isArray(arrOrObj)) {
