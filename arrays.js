@@ -60,5 +60,6 @@ function getLessThanZero(arr) {
     return arr.filter((num) => num < 0);
 }
 
-const lessArr = getLessThanZero([-1, -2, 4, 8]);
-console.log(lessArr);
+console.log(getLessThanZero([-1, -2, 4, 8]));
+console.log(getLessThanZero([1, 2, -1, -90, 10])); //[-1, -90]
+console.log(getLessThanZero([1, 2])); // []
