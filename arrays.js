@@ -13,14 +13,14 @@
 // and the index should be the second.
 
 function each(arrOrObj, cb) {
-    if (typeof arrOrObj === "object") {
+    if (Array.isArray(arrOrObj)) {
+        arrOrObj.forEach(function (el, i) {
+            cb(el, i);
+        });
+    } else if (typeof arrOrObj === "object") {
         for (var key in arrOrObj) {
             cb(arrOrObj[key], key);
         }
-    } else if (Array.isArray(arrOrObj)) {
-        arrOrObj.map((el, i) => cb(el, i));
-    } else {
-        return "ERROR! This function does not process non object/array data structures";
     }
 }
 
