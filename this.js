@@ -15,8 +15,6 @@ function Rectangle(width, height) {
 }
 
 function Square(n) {
-    this.width = n;
-    this.height = n;
     Rectangle.apply(this, [n, n]);
 }
 
