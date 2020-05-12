@@ -11,7 +11,7 @@
             left += links[0].offsetWidth;
             links[0].parentNode.appendChild(links[0]);
         }
-        left -= 1;
+        left--;
         headlines.style.left = left + "px";
         requestAnimationFrame(moveElement);
     }
