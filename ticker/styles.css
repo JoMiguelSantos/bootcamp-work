@@ -2,20 +2,34 @@ body {
     margin: 0;
 }
 
-#headlines {
+.headlines {
     white-space: nowrap;
     position: absolute;
+}
+
+#headlines-top-left {
     top: 0;
     left: 95%;
 }
 
-#headlines a {
+#headlines-bottom-right {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.headlines a {
     padding-right: 40px;
     text-decoration: none;
     color: black;
 }
 
-#ticker {
+.headlines a:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+.ticker {
     position: relative;
     overflow: hidden;
     height: 1.5em;
