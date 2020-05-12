@@ -16,7 +16,7 @@ function findAllAndStyle(sel) {
 // a parameter. The function should return an array containing all the elements in
 // the document that have the class that was passed in.
 function findByClass(className) {
-    return document.getElementsByClassName(className);
+    return [...document.getElementsByClassName(className)];
 }
 
 // Write a function that inserts an element into the body of the currently loaded page.
