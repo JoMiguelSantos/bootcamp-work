@@ -16,17 +16,18 @@ function findAllAndStyle(sel) {
 // a parameter. The function should return an array containing all the elements in
 // the document that have the class that was passed in.
 function findByClass(className) {
-    return [...document.getElementsByClassName(className)];
+    return [].slice.call(document.getElementsByClassName(className));
 }
 
 // Write a function that inserts an element into the body of the currently loaded page.
 // That element should have fixed position, z-index of 2147483647, left of 20px,
 // top of 100px, font-size of 200px, and contain the text 'AWESOME'.
 function insertElementInBody(el) {
-    el.style.zIndex = 2147483647;
-    el.style.left = "20px";
-    el.style.top = "100px";
-    el.style.fontSize = "200px";
-    el.textContent = "AWESOME";
-    document.body.appendChild(el);
+    var element = document.createElement(el);
+    element.style.zIndex = 2147483647;
+    element.style.left = "20px";
+    element.style.top = "100px";
+    element.style.fontSize = "200px";
+    element.textContent = "AWESOME";
+    document.body.appendChild(element);
 }
