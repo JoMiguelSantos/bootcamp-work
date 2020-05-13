@@ -4,8 +4,8 @@
 // screen.
 var divEx1 = document.getElementById("exercise-1");
 divEx1.addEventListener("mousemove", function (e) {
-    divEx1.style.left = e.clientX / 2 + "px";
-    divEx1.style.top = e.clientY / 2 + "px";
+    divEx1.style.left = -e.target.offsetWidth / 2 + e.clientX + "px";
+    divEx1.style.top = -e.target.offsetWidth / 2 + e.clientY + "px";
 });
 
 // Make a page that has a <textarea> element on it. As the user types visible
