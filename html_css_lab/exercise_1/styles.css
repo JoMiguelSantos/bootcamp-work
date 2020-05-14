@@ -16,6 +16,66 @@ header {
     float: left;
 }
 
+#overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    position: fixed;
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transition: all 1s;
+}
+
+#overlay.active {
+    visibility: visible;
+}
+
+#side-nav {
+    visibility: hidden;
+    position: fixed;
+    z-index: 10001;
+    width: 0;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background-color: aliceblue;
+    padding: 20px;
+    transition: all 0.5s;
+}
+
+#side-nav.active {
+    visibility: visible;
+    width: 30%;
+}
+
+#side-nav a {
+    display: block;
+    text-decoration: none;
+    color: blue;
+    padding: 5px;
+}
+
+#side-nav a:last-child {
+    margin-top: 10px;
+    font-size: 10px;
+}
+
+#side-nav.active div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+    visibility: visible;
+}
+
+#side-nav div {
+    position: fixed;
+    visibility: hidden;
+}
+
 .hamburger {
     width: 20px;
     height: 20px;
