@@ -12,3 +12,8 @@ hamburger.addEventListener("click", function () {
     overlay.classList.add("active");
     sideNav.classList.add("active");
 });
+
+overlay.addEventListener("click", function () {
+    overlay.classList.remove("active");
+    sideNav.classList.remove("active");
+});
