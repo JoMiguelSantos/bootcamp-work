@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+}
+
+.kitty-container {
+    display: flex;
+    height: 600px;
+    position: relative;
+    border: 5px solid red;
+    overflow: hidden;
+}
+
+.kitty-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateX(100%); /* this is the DEFAULT position */
+}
+
+.kitty-container img.onscreen {
+    transform: translateX(0);
+    transition: transform 3s;
+}
+
+.kitty-container img.offscreen-left {
+    transform: translateX(-100%);
+    transition: transform 3s;
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-self: flex-end;
+    width: 100%;
+}
+
+.dots span {
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 50%;
+    margin: 10px;
+    transition: background-color 3s;
+}
+
+.dots span.active {
+    background-color: white;
+}
