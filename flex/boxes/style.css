@@ -1,0 +1,52 @@
+.row {
+    display: flex;
+}
+
+.outer {
+    display: flex;
+    width: 120px;
+    height: 120px;
+    margin: 0;
+    padding: 0;
+    margin-right: 3px;
+}
+
+.outer.one {
+    justify-content: flex-end;
+    background-color: gray;
+}
+.outer.two {
+    justify-content: flex-end;
+    background-color: black;
+}
+
+.outer.three {
+    background-color: blue;
+}
+
+.outer.four {
+    background-color: blueviolet;
+}
+
+.inner {
+    width: 60px;
+    height: 60px;
+}
+
+.inner.one {
+    background-color: orange;
+}
+
+.inner.two {
+    align-self: flex-end;
+    background-color: yellow;
+}
+
+.inner.three {
+    align-self: flex-end;
+    background-color: green;
+}
+
+.inner.four {
+    background-color: pink;
+}
