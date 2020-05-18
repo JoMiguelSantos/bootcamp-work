@@ -22,12 +22,12 @@ body {
 
 .kitty-container img.onscreen {
     transform: translateX(0);
-    transition: transform 3s;
+    transition: transform 1s;
 }
 
 .kitty-container img.offscreen-left {
     transform: translateX(-100%);
-    transition: transform 3s;
+    transition: transform 1s;
 }
 
 .dots {
@@ -45,7 +45,7 @@ body {
     border: 2px solid white;
     border-radius: 50%;
     margin: 10px;
-    transition: background-color 3s;
+    transition: background-color 1s;
 }
 
 .dots span.active {
