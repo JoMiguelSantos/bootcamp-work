@@ -10,6 +10,10 @@ header {
     padding: 10px 20px;
 }
 
+.main {
+    position: relative;
+}
+
 .logo {
     width: 100px;
     height: 20px;
@@ -188,4 +192,57 @@ footer {
     color: whitesmoke;
     background-color: rgb(65, 65, 65);
     padding: 5px 10px;
+}
+
+/* Pop Up */
+.popup-overlay {
+    visibility: hidden;
+    position: absolute;
+    font-size: 10px;
+    background: #ffffff;
+    border: 3px solid black;
+    border-radius: 30px;
+    width: 50%;
+    height: 30%;
+    left: 25%;
+    top: 30%;
+    padding: 20px;
+}
+@media only screen and (max-width: 450px) {
+    .popup-overlay {
+        height: 30%;
+        font-size: 9px;
+    }
+}
+
+.popup-overlay.active {
+    visibility: visible;
+    text-align: center;
+}
+
+.popup-content {
+    visibility: hidden;
+}
+
+.popup-content.active {
+    visibility: visible;
+}
+
+.close {
+    position: absolute;
+    top: 5%;
+    left: 90%;
+    vertical-align: middle;
+    margin: 0.2rem;
+    font-size: 1rem;
+    color: black;
+}
+@media only screen and (max-width: 450px) {
+    .close {
+        left: 87%;
+    }
+}
+
+.close:hover {
+    cursor: pointer;
 }
