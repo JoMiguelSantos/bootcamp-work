@@ -1,7 +1,6 @@
 var bottomDiv = $("#bottom-div");
 var bar = $("#separator");
 var lastX;
-console.log(bar, bottomDiv);
 
 bar.on("mousedown", function (e) {
     if (e.button == 0) {
