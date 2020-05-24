@@ -2,15 +2,18 @@ var columns = $(".column");
 var banner = $(".banner");
 var display = $(".display");
 var activePlayer = $(".active-player");
-
+var dragSlot = $(".draggable");
 var currentPlayer = "player-1";
 var gameStatus = { "player-1": [], "player-2": [] };
+var winnerCombo;
 
 function switchPlayer() {
+    dragSlot.removeClass(currentPlayer).html("");
     currentPlayer = currentPlayer === "player-1" ? "player-2" : "player-1";
     var playerProper = "Player " + currentPlayer.split("-")[1];
     var playerColor = currentPlayer === "player-1" ? "blue" : "red";
     activePlayer.html(playerProper).css({ backgroundColor: playerColor });
+    dragSlot.addClass(currentPlayer);
 }
 
 function playerMove(slots, column) {
@@ -144,33 +147,35 @@ function winCheck() {
     return won;
 }
 
+function wonOrContinue() {
+    if (gameStatus[currentPlayer].length >= 4) {
+        winnerCombo = winCheck();
+    }
+
+    if (winnerCombo) {
+        var playerColor = currentPlayer === "player-1" ? "blue" : "red";
+        for (var slot = 0; slot < winnerCombo.length; slot++) {
+            comboHighlight(winnerCombo[slot], playerColor);
+        }
+        banner.addClass("visible");
+        display.css({ display: "none" });
+        banner
+            .css({ backgroundColor: playerColor })
+            .prepend("You WON Player " + currentPlayer.split("-")[1] + "!!!");
+        removeHandlers();
+        $(".draggable").draggable({ disabled: true });
+    } else {
+        switchPlayer();
+    }
+}
+
 function addClickHandler(elem, column) {
     elem.on("click", function (e) {
         var slots = e.currentTarget.querySelectorAll(".slot");
-        var winnerCombo;
 
         playerMove(slots, column);
 
-        if (gameStatus[currentPlayer].length >= 4) {
-            winnerCombo = winCheck();
-        }
-
-        if (winnerCombo) {
-            var playerColor = currentPlayer === "player-1" ? "blue" : "red";
-            for (var slot = 0; slot < winnerCombo.length; slot++) {
-                comboHighlight(winnerCombo[slot], playerColor);
-            }
-            banner.addClass("visible");
-            display.css({ display: "none" });
-            banner
-                .css({ backgroundColor: playerColor })
-                .prepend(
-                    "You WON Player " + currentPlayer.split("-")[1] + "!!!"
-                );
-            removeHandlers();
-        } else {
-            switchPlayer();
-        }
+        wonOrContinue(winnerCombo);
     });
 }
 
@@ -191,3 +196,18 @@ function removeHandlers() {
 for (var column = 0; column < columns.length; column++) {
     addClickHandler(columns.eq(column), column);
 }
+
+$(document).ready(function () {
+    $(".draggable").draggable({
+        revert: true,
+    });
+    $(".column").droppable({
+        accept: ".draggable",
+        drop: function () {
+            var column = Array.prototype.indexOf.call(columns, this);
+            var slots = this.querySelectorAll(".slot");
+            playerMove(slots, column);
+            wonOrContinue(winnerCombo);
+        },
+    });
+});

@@ -82,3 +82,13 @@ main {
     background-color: goldenrod;
     cursor: pointer;
 }
+
+.draggable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    margin: 10px;
+    color: white;
+    font-size: 20px;
+}
