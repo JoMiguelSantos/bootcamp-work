@@ -24,8 +24,6 @@ headlinesBottomRight.on("mouseout", function () {
 });
 
 function moveElementToTheLeft() {
-    console.log("moving left");
-
     if (left <= -linksTop.eq(0).outerWidth()) {
         left += linksTop.eq(0).outerWidth();
         linksTop.eq(0).appendTo(linksTop);
@@ -36,7 +34,6 @@ function moveElementToTheLeft() {
 }
 
 function moveElementToTheRight() {
-    console.log("moving right");
     if (right >= -linksBottom.eq(0).outerWidth()) {
         right -= linksBottom.eq(0).outerWidth();
         linksBottom.eq(0).appendTo(linksBottom);
@@ -49,7 +46,6 @@ function moveElementToTheRight() {
 
 $(document).ready(
     $.get("/data.json", function (data) {
-        console.log("data", data);
         for (var i = 0; i < 8; i++) {
             if (i < 4) {
                 linksTop.eq(i).attr("href", data[i].url);
@@ -59,6 +55,7 @@ $(document).ready(
                 linksBottom.eq(i - 4).text(data[i].text);
             }
         }
+
         left = headlinesTopLeft.offset().left;
         right = headlinesBottomRight.offset().left - window.innerWidth;
 
