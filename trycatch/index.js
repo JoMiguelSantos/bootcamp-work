@@ -56,7 +56,7 @@ function translateNumberToGerman() {
         return translation;
     } catch (err) {
         console.log(err);
-        translateNumberToGerman();
+        return translateNumberToGerman();
     }
 }
 

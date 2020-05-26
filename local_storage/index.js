@@ -14,5 +14,9 @@ textarea.on("input", function () {
 });
 
 $(document).ready(function () {
-    textarea.val(localStorage.getItem("input"));
+    try {
+        textarea.val(localStorage.getItem("input"));
+    } catch (err) {
+        console.log("Oh nooooo");
+    }
 });
