@@ -2,6 +2,8 @@
     var nextUrl;
     var apiUrl = "http://spicedify.herokuapp.com/spotify";
     var moreResults = $("#more-results");
+    var urlParams = new URLSearchParams(window.location.search);
+    var scroll = urlParams.get("scroll");
 
     function formatResults(data) {
         var html = "";
@@ -82,21 +84,22 @@
 
     moreResults.on("click", getMoreResults);
 
-    var didScroll = false;
-    $(window).scroll(function () {
-        didScroll = true;
-    });
+    if (scroll == "infinite") {
+        var didScroll = false;
+        $(window).scroll(function () {
+            didScroll = true;
+        });
 
-    setInterval(function () {
-        if (didScroll) {
-            didScroll = false;
-
-            if (
-                $(window).scrollTop() + $(window).height() >
-                $(document).height() - 200
-            ) {
-                getMoreResults();
+        setInterval(function () {
+            if (didScroll) {
+                didScroll = false;
+                if (
+                    $(window).scrollTop() + $(window).height() >
+                    $(document).height() - 200
+                ) {
+                    getMoreResults();
+                }
             }
-        }
-    }, 250);
+        }, 250);
+    }
 })();
