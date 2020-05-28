@@ -1,0 +1,29 @@
+q {
+    margin-left: 10px;
+    font-size: 14px;
+    font-style: italic;
+}
+h1 {
+    margin: 10px auto;
+}
+
+h5 {
+    margin: 10px 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.text-container {
+    width: 50%;
+}
+
+img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
