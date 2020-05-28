@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Spotify</title>
+        <link rel="stylesheet" href="style.css?v=1" />
+    </head>
+    <body>
+        <h1>Spotify Search</h1>
+        <input type="text" name="user-input"></input>
+        <select>
+            <!-- make sure that artist and album are spelled in singular and with non CAPITALS !!!-->
+            <option id='artist'>artist</option>
+            <option id='album'>album</option>
+        </select>
+        <button id='submit-btn'>submit</button>
+        <p class="result-for"></p>
+        <div id='results-container'></div>
+        <button id="more-results">More</button>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
