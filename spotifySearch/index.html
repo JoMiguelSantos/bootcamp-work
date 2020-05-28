@@ -18,6 +18,17 @@
         <p class="result-for"></p>
         <div id='results-container'></div>
         <button id="more-results">More</button>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+          <script id="entry" type="text/x-handlebars-template">
+            <div class="artistsOrAlbums">
+                {{#items}}
+                <a target='_blank' href={{external_urls/spotify}}>
+                  <img src={{images.0.url}}></img>
+                  {{name}}
+                </a>
+                {{/items}}
+            </div>
+          </script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="index.js"></script>
     </body>

@@ -1,4 +1,14 @@
 (function () {
+    Handlebars.templates = Handlebars.templates || {};
+
+    var templates = document.querySelectorAll(
+        'script[type="text/x-handlebars-template"]'
+    );
+
+    Array.prototype.slice.call(templates).forEach(function (script) {
+        Handlebars.templates[script.id] = Handlebars.compile(script.innerHTML);
+    });
+
     var nextUrl;
     var apiUrl = "http://spicedify.herokuapp.com/spotify";
     var moreResults = $("#more-results");
@@ -10,24 +20,15 @@
         window.location.search.match(/(?<=scroll=)[\w]+/)[0];
 
     function formatResults(data) {
-        var html = "";
         var imgUrl = "music.jpg";
 
         for (var i = 0; i < data.items.length; i++) {
-            if (data.items[i].images.length > 0) {
-                imgUrl = data.items[i].images[0].url;
+            if (data.items[i].images.length === 0) {
+                data.items[i].images[0] = { url: imgUrl };
             }
-
-            html +=
-                "<a target='_blank' href='" +
-                data.items[i].external_urls.spotify +
-                "'><img src='" +
-                imgUrl +
-                "'></img>" +
-                data.items[i].name +
-                "</a>";
         }
-        return html;
+
+        return data;
     }
 
     function formattedUrl(data) {
@@ -58,8 +59,10 @@
                     );
                 }
 
-                var html = formatResults(data);
-                $("#results-container").html(html);
+                var formattedData = formatResults(data);
+                $("#results-container").html(
+                    Handlebars.templates.entry(formattedData)
+                );
 
                 if (data.next != null) {
                     nextUrl = formattedUrl(data);
@@ -73,8 +76,10 @@
     function getMoreResults() {
         $.get(moreResults.attr("href"), function (data) {
             var data = data.albums || data.artists;
-            var html = formatResults(data);
-            $("#results-container").append(html);
+            var formattedData = formatResults(data);
+            $("#results-container").append(
+                Handlebars.templates.entry(formattedData)
+            );
 
             if (data.next != null) {
                 nextUrl = formattedUrl(data);
