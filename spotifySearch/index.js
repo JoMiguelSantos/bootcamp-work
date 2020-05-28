@@ -4,7 +4,10 @@
     var moreResults = $("#more-results");
     // var urlParams = new URLSearchParams(window.location.search);
     // var scroll = urlParams.get("scroll");
-    var scroll = window.location.search.match(/(?<=scroll=)[\w]+/)[0];
+    var scroll =
+        window.location.search &&
+        window.location.search.match(/(?<=scroll=)[\w]+/) &&
+        window.location.search.match(/(?<=scroll=)[\w]+/)[0];
 
     function formatResults(data) {
         var html = "";
