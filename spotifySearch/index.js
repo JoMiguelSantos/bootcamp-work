@@ -1,6 +1,35 @@
 (function () {
     var nextUrl;
     var apiUrl = "http://spicedify.herokuapp.com/spotify";
+    var moreResults = $("#more-results");
+
+    function formatResults(data) {
+        var html = "";
+        var imgUrl = "music.jpg";
+
+        for (var i = 0; i < data.items.length; i++) {
+            if (data.items[i].images.length > 0) {
+                imgUrl = data.items[i].images[0].url;
+            }
+
+            html +=
+                "<a target='_blank' href='" +
+                data.items[i].external_urls.spotify +
+                "'><img src='" +
+                imgUrl +
+                "'></img>" +
+                data.items[i].name +
+                "</a>";
+        }
+        return html;
+    }
+
+    function formattedUrl(data) {
+        return (
+            data.next &&
+            data.next.replace("https://api.spotify.com/v1/search", apiUrl)
+        );
+    }
 
     $("#submit-btn").on("click", function () {
         var userInput = $("input[name=user-input]").val();
@@ -15,82 +44,59 @@
             },
             success: function (data) {
                 var data = data.albums || data.artists;
-
                 $(".result-for").html("Results for: " + userInput);
 
-                var html = "";
-                var imgUrl = "music.jpg";
                 if (data.items.length === 0) {
                     return $("#results-container").html(
                         "No results were found"
                     );
                 }
-                for (var i = 0; i < data.items.length; i++) {
-                    if (data.items[i].images.length > 0) {
-                        imgUrl = data.items[i].images[0].url;
-                    }
 
-                    html +=
-                        "<a src='" +
-                        data.items[i].external_urls.spotify +
-                        "'><img src='" +
-                        imgUrl +
-                        "'></img>" +
-                        data.items[i].name +
-                        "</a>";
-                }
+                var html = formatResults(data);
                 $("#results-container").html(html);
 
                 if (data.next != null) {
-                    nextUrl =
-                        data.next &&
-                        data.next.replace(
-                            "https://api.spotify.com/v1/search",
-                            apiUrl
-                        );
+                    nextUrl = formattedUrl(data);
 
-                    $("#more-results")
-                        .addClass("visible")
-                        .attr("href", nextUrl);
+                    moreResults.addClass("visible").attr("href", nextUrl);
                 }
             },
         });
     });
 
-    $("#more-results").on("click", function () {
-        $.get(this.getAttribute("href"), function (data) {
+    function getMoreResults() {
+        $.get(moreResults.attr("href"), function (data) {
             var data = data.albums || data.artists;
-
-            var html = "";
-            var imgUrl = "music.jpg";
-            for (var i = 0; i < data.items.length; i++) {
-                if (data.items[i].images.length > 0) {
-                    imgUrl = data.items[i].images[0].url;
-                }
-
-                html +=
-                    "<a src='" +
-                    data.items[i].external_urls.spotify +
-                    "'><img src='" +
-                    imgUrl +
-                    "'></img>" +
-                    data.items[i].name +
-                    "</a>";
-            }
+            var html = formatResults(data);
             $("#results-container").append(html);
 
             if (data.next != null) {
-                nextUrl =
-                    data.next &&
-                    data.next.replace(
-                        "https://api.spotify.com/v1/search",
-                        apiUrl
-                    );
+                nextUrl = formattedUrl(data);
 
-                $("#more-results").addClass("visible").attr("href", nextUrl);
+                moreResults.addClass("visible").attr("href", nextUrl);
             } else {
-                $("#more-results").removeClass("visible");
+                moreResults.removeClass("visible");
             }
         });
+    }
+
+    moreResults.on("click", getMoreResults);
+
+    var didScroll = false;
+    $(window).scroll(function () {
+        didScroll = true;
     });
+
+    setInterval(function () {
+        if (didScroll) {
+            didScroll = false;
+
+            if (
+                $(window).scrollTop() + $(window).height() >
+                $(document).height() - 200
+            ) {
+                getMoreResults();
+            }
+        }
+    }, 250);
 })();

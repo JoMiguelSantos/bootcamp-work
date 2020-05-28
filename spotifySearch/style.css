@@ -4,7 +4,7 @@ img {
     margin-right: 20px;
 }
 
-#results-container a {
+a {
     display: flex;
     align-items: center;
     margin: 10px;
@@ -12,9 +12,8 @@ img {
     color: black;
 }
 
-#results-container a > * {
-    display: flex;
-    text-align: center;
+a:hover {
+    background-color: lightgray;
 }
 
 #more-results {
