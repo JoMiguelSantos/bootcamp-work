@@ -18,8 +18,6 @@ const server = http.createServer((req, res) => {
 
         if (req.url === "/") {
             const html = buildHtml();
-            console.log("homepage", html);
-
             res.setHeader("Content-Type", "text/html");
             res.statusCode = 200;
             res.end(html);
@@ -27,15 +25,11 @@ const server = http.createServer((req, res) => {
 
         fs.stat(filePath, (err, stats) => {
             if (err) {
-                console.log("error in fs.stat: ", err);
                 res.statusCode = 404;
                 return res.end();
             }
-            console.log("filePath: ", filePath);
             if (stats.isFile()) {
-                console.log("its a file!");
                 const extension = path.extname(filePath);
-                console.log("extension: ", extension);
                 switch (extension) {
                     case ".html":
                         res.setHeader("Content-Type", "text/html");
@@ -67,19 +61,16 @@ const server = http.createServer((req, res) => {
                 const readStreamHtml = fs.createReadStream(filePath);
                 readStreamHtml.pipe(res);
                 readStreamHtml.on("error", (err) => {
-                    console.log(err);
                     res.statusCode = 500;
                     res.end();
                 });
             } else {
-                console.log("its a directory!");
                 if (req.url.endsWith("/")) {
                     const readStreamHtml = fs.createReadStream(
                         req.url + "index.html"
                     );
                     readStreamHtml.pipe(res);
                     readStreamHtml.on("error", (err) => {
-                        console.log(err);
                         res.statusCode = 500;
                         res.end();
                     });
