@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Spotify</title>
+        <link rel="stylesheet" href="style.css?v=1" />
+    </head>
+    <body>
+        <h1>Spotify Search</h1>
+        <input type="text" name="user-input"></input>
+        <select>
+            <!-- make sure that artist and album are spelled in singular and with non CAPITALS !!!-->
+            <option id='artist'>artist</option>
+            <option id='album'>album</option>
+        </select>
+        <button id='submit-btn'>submit</button>
+        <p class="result-for"></p>
+        <div id='results-container'></div>
+        <button id="more-results">More</button>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+          <script id="entry" type="text/x-handlebars-template">
+            <div class="artistsOrAlbums">
+                {{#items}}
+                <a target='_blank' href={{external_urls/spotify}}>
+                  <img src={{images.0.url}}></img>
+                  {{name}}
+                </a>
+                {{/items}}
+            </div>
+          </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
