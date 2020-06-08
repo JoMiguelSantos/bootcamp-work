@@ -20,7 +20,7 @@ const server = http.createServer((req, res) => {
             const html = buildHtml();
             res.setHeader("Content-Type", "text/html");
             res.statusCode = 200;
-            res.end(html);
+            return res.end(html);
         }
 
         fs.stat(filePath, (err, stats) => {
@@ -56,7 +56,9 @@ const server = http.createServer((req, res) => {
                         res.setHeader("Content-Type", "image/svg+xml");
                         break;
                     default:
-                        res.end(`The file type ${extension} is not allowed`);
+                        return res.end(
+                            `The file type ${extension} is not allowed`
+                        );
                 }
                 const readStreamHtml = fs.createReadStream(filePath);
                 readStreamHtml.pipe(res);
@@ -77,13 +79,13 @@ const server = http.createServer((req, res) => {
                 } else {
                     res.statusCode = 302;
                     res.setHeader("Location", `${req.url}/index.html`);
-                    res.end();
+                    return res.end();
                 }
             }
         });
     } else {
         res.statusCode = 405;
-        res.end(
+        return res.end(
             `${req.method} is not an allowed method. Only GET requests are allowed.`
         );
     }
