@@ -1,0 +1,28 @@
+img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+a {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    background-color: lightgray;
+}
+
+#more-results {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    visibility: hidden;
+}
+
+#more-results.visible {
+    visibility: visible;
+}
