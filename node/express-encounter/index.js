@@ -1,5 +1,27 @@
 const express = require("express");
 const app = express();
+const basicAuth = require("basic-auth");
+
+const auth = function (req, res, next) {
+    const creds = basicAuth(req);
+    if (!creds || creds.name != "incognito" || creds.pass != "abacadabra") {
+        res.setHeader(
+            "WWW-Authenticate",
+            'Basic realm="What\'s the password??"'
+        );
+        res.sendStatus(401);
+    } else {
+        next();
+    }
+};
+
+app.use((req, res, next) => {
+    if (req.url === "/panes/") {
+        auth(req, res, next);
+    } else {
+        next();
+    }
+});
 
 app.use(require("cookie-parser")());
 app.use(
