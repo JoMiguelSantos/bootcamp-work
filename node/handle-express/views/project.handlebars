@@ -1,0 +1,17 @@
+<main>
+  <a class="home" href="/">Home</a>
+  <section>
+  <h3>My Projects</h3>
+  <div class="projects__list">
+    {{> projects }}
+  </div>
+  </section>
+  <section class="project">
+    <h1>{{project.name}}</h1>
+    <a href={{project.directory}} target="_blank">
+      <img class="project-image" src={{project.screenshot}} alt="project image">
+    </a>
+    <p>{{project.description}}</p>
+    <a href={{project.directory}} target="_blank">See Project</a>
+  </section>
+</main>

@@ -1,0 +1,14 @@
+<ul class="projects">
+  {{#projects}}
+  <li>
+    {{#if ../img}}
+    <a href={{link}}>
+      <img src={{screenshot}} alt="project screenshot">
+    </a>
+    {{/if}}
+    <a href={{link}}>
+      <h4 class={{currentProject directory ../project.directory}}>{{name}}</h4>
+    </a>
+  </li>
+  {{/projects}}
+</ul>

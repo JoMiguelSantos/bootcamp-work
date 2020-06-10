@@ -1,6 +1,6 @@
 li {
     list-style: none;
-    margin: 20px;
+    margin: 10px 20px;
 }
 
 img {
@@ -11,4 +11,42 @@ img {
 
 ul {
     display: flex;
+    padding: 0;
+}
+
+.project-image {
+    width: 600px;
+    height: 600px;
+}
+
+main {
+    display: flex;
+    margin-top: 50px;
+}
+
+.projects__list .projects {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.projects__list {
+    background-color: rgba(224, 224, 224, 0.568);
+    margin-right: 30px;
+    height: 100%;
+}
+
+.home {
+    margin: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.highlight {
+    background-color: rgba(218, 218, 218, 0.966);
+}
+h4 {
+    text-align: center;
+    padding: 5px;
 }
