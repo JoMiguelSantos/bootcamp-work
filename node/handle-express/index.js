@@ -47,14 +47,23 @@ app.use(express.static("projects"));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-    res.render("home", { projects });
+    res.render("home", {
+        projects,
+        helpers: {
+            currentProject(link, curDir) {
+                if (link === curDir) {
+                    return "highlight";
+                }
+                return "";
+            },
+        },
+    });
 });
 
 app.get("/project/:project", (req, res) => {
     const project = projects.find((project) => {
         return `/${req.params.project}` === project.directory;
     });
-    console.log(project);
 
     if (project) {
         res.render("project", {
@@ -71,7 +80,6 @@ app.get("/project/:project", (req, res) => {
             },
         });
     } else {
-        console.log("not found");
         res.sendStatus(404);
     }
 });
