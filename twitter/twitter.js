@@ -1,75 +1,78 @@
 const { key, secret } = require("./secrets.json");
 const https = require("https");
 
-module.exports.getToken = function (callback) {
-    const creds = `${key}:${secret}`;
-    const encodedCreds = Buffer.from(creds).toString("base64");
+module.exports.getToken = (callback) =>
+    new Promise((resolve, reject) => {
+        const creds = `${key}:${secret}`;
+        const encodedCreds = Buffer.from(creds).toString("base64");
 
-    const options = {
-        host: "api.twitter.com",
-        path: "/oauth2/token",
-        method: "POST",
-        headers: {
-            Authorization: `Basic ${encodedCreds}`,
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        },
-    };
+        const options = {
+            host: "api.twitter.com",
+            path: "/oauth2/token",
+            method: "POST",
+            headers: {
+                Authorization: `Basic ${encodedCreds}`,
+                "Content-Type":
+                    "application/x-www-form-urlencoded;charset=UTF-8",
+            },
+        };
 
-    function cb(response) {
-        if (response.statusCode != 200) {
-            callback(response.statusCode);
-            return;
+        function cb(response) {
+            if (response.statusCode != 200) {
+                reject(callback(response.statusCode));
+                return;
+            }
+
+            let body = "";
+
+            response.on("data", (chunk) => {
+                body += chunk;
+            });
+
+            response.on("end", () => {
+                const parsedBody = JSON.parse(body);
+                resolve(callback(null, parsedBody.access_token));
+            });
         }
 
-        let body = "";
+        const req = https.request(options, cb);
 
-        response.on("data", (chunk) => {
-            body += chunk;
-        });
+        req.end("grant_type=client_credentials");
+    });
 
-        response.on("end", () => {
-            const parsedBody = JSON.parse(body);
-            callback(null, parsedBody.access_token);
-        });
-    }
+module.exports.getTweets = (bearerToken, callback) =>
+    new Promise((resolve, reject) => {
+        const options = {
+            host: "api.twitter.com",
+            path:
+                "/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=nytimes",
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${bearerToken}`,
+            },
+        };
 
-    const req = https.request(options, cb);
+        function cb(response) {
+            if (response.statusCode != 200) {
+                reject(callback(response.statusCode));
+                return;
+            }
 
-    req.end("grant_type=client_credentials");
-};
+            let body = "";
 
-module.exports.getTweets = function (bearerToken, callback) {
-    const options = {
-        host: "api.twitter.com",
-        path:
-            "/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=nytimes",
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${bearerToken}`,
-        },
-    };
+            response.on("data", (chunk) => {
+                body += chunk;
+            });
 
-    function cb(response) {
-        if (response.statusCode != 200) {
-            callback(response.statusCode);
-            return;
+            response.on("end", () => {
+                const parsedBody = JSON.parse(body);
+                resolve(callback(null, parsedBody));
+            });
         }
+        const req = https.request(options, cb);
 
-        let body = "";
-
-        response.on("data", (chunk) => {
-            body += chunk;
-        });
-
-        response.on("end", () => {
-            const parsedBody = JSON.parse(body);
-            callback(null, parsedBody);
-        });
-    }
-    const req = https.request(options, cb);
-
-    req.end();
-};
+        req.end();
+    });
 
 module.exports.filterTweets = function (tweets) {
     let dataArr = [];
