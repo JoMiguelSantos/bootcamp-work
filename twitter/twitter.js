@@ -40,12 +40,11 @@ module.exports.getToken = (callback) =>
         req.end("grant_type=client_credentials");
     });
 
-module.exports.getTweets = (bearerToken, callback) =>
+module.exports.getTweets = (bearerToken, screen_name, callback) =>
     new Promise((resolve, reject) => {
         const options = {
             host: "api.twitter.com",
-            path:
-                "/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=nytimes",
+            path: `/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=${screen_name}`,
             method: "GET",
             headers: {
                 Authorization: `Bearer ${bearerToken}`,
